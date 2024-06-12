@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa para Você, Querida Princesa 💓</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<style>
+	
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #FF69B4, #FFE4B5)fixed; 
+			transition: background 0.5s ease-in-out;
+        }
+        .container {
+            text-align: center;
+            background-color: #FFE4B5;
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in-out;
+			position: relative;
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #FF69B4;
+            font-size: 36px;
+			margin: 0;	
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #E9967A;
+			font-weight: 300;
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        .btn {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #FF69B4;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #FF1493;
+            transform: scale(1.1);
+        }
+        .hidden-surprise, .confirm-box, .decline-message, .secret-message, .signature {
+            display: none;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #800000;
+			transition: opacity 0.5s ease-in-out;
+			margin-bottom: -20px;
+        }
+        .left-aligned {
+            text-align: left;
+        }
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+		.centered-text {
+            text-align: center;
+        }
+		.secret-message {
+            font-family: 'Lobster', cursive;
+            font-size: 17px;
+            color: 	#E9967A;
+			margin-top: 15px;
+        }
+		.signature {
+            font-family: 'Pacifico', cursive;
+            font-size: 14px;
+            color: #FF7F50;
+            margin-top: 15px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+		.gif {
+            max-width: 200px;
+            height: auto;
+            margin-top: 20px;
+			animation: fadeIn 0.5s ease-in-out;
+        }
+        .secret-message-btn {
+            margin-top: 20px;
+        }
+        .hide {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+		
+    </style>
+</head>
+<body>
+    <div class="container">
+            <h1 id="greeting">Oii minha Querida Princesa! 💓</h1>
+            <p class="message" id="message">Nesse dia tão especial para nós dois eu tenho uma surpresa muito especial para você.<br>Clique no botão abaixo.</p>
+        <div class="btn-container">
+            <button class="btn" onclick="showConfirmBox()"><i class="fas fa-gift"></i> Ver Surpresa</button>
+        </div>
+        <div class="confirm-box" id="confirm-box">
+            <p>Tem certeza?</p>
+            <button class="btn" onclick="revealSurprise()">Sim</button>
+            <button class="btn" onclick="showDeclineMessage()">Não</button>
+        </div>
+        <div class="decline-message" id="decline-message"> 	
+		<div class="centered">
+            <img src="fig.jpg" width="300">
+		</div>
+            <p>Sério que vai brincar comigo neste momento Débora? <br> É mesmo uma caixinha de surpresas KKKKKKK 🎁 </p>
+            <button class="btn" onclick="reset()">Mudei de Ideia</button>
+        </div>
+        <div class="hidden-surprise left-aligned" id="surprise">
+		<div class="centered">
+		    <img class="gif" src="love.gif">
+		</div>
+            <p><strong> Muito obrigado por ser a melhor namorada desse mundo inteiro, mudar a minha vida e me tornar um homem melhor.<br> Lembre-se que você é um universo infinito de qualidades, características únicas e realizações.<br> Sou muito feliz ao seu lado, pois você me faz muito bem e espero do fundo do meu coração que esse seja o nosso primeiro dia 12 de muitos! 💖</strong></p>
+		<div class="centered">
+            <img src="foto.jpg" width="400">
+		</div>
+		<div class="centered">
+            <button class="btn secret-message-btn" onclick="toggleSecretMessage()">Secret Message for You Dear</button>
+        </div>
+		</div>
+        <div class="secret-message centered-text" id="secret-message">
+            <p>Eu te amei ontem, te amo hoje, vou te amar amanhã e te amarei por toda a eternidade! 💕 </p>
+        </div>
+		<div class="signature centered-text" id="signature">
+		    <p>Erik Souza (Seu e apenas seu, Xuxu)</p>
+		</div>
+    </div>
+
+    <script>
+        function showConfirmBox() {
+            document.querySelector('.btn-container').style.display = 'none';
+            document.getElementById('confirm-box').style.display = 'block';
+        }
+        function revealSurprise() {
+            document.getElementById('confirm-box').style.display = 'none';
+            document.getElementById('message').classList.add('hide');
+			document.getElementById('greeting').classList.add('hide');
+            document.getElementById('surprise').style.display = 'block';
+        }
+        function showDeclineMessage() {
+            document.getElementById('confirm-box').style.display = 'none';
+            document.getElementById('decline-message').style.display = 'block';
+			document.getElementById('message').classList.add('hide');
+			document.getElementById('greeting').classList.add('hide');
+        }
+        function reset() {
+            document.getElementById('decline-message').style.display = 'none';
+            document.querySelector('.btn-container').style.display = 'block';
+			document.getElementById('message').classList.remove('hide');
+            document.getElementById('greeting').classList.remove('hide');
+        }
+        function toggleSecretMessage() {
+            const secretMessage = document.getElementById('secret-message');
+            const signature = document.getElementById('signature');
+            if (secretMessage.style.display === 'none' || secretMessage.style.display === '') {
+                secretMessage.style.display = 'block';
+                signature.style.display = 'block';
+            } else {
+                secretMessage.style.display = 'none';
+                signature.style.display = 'none';
+            }
+        }
+	
+    </script>
+</body>
+</html>
